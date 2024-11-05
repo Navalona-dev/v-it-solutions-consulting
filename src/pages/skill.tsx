@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image'; 
-import image from '../assets/images/skills.png';
+import image from '../assets/images/hero-img.png';
 import { Waypoint } from 'react-waypoint';
 
 const Skill = () => {

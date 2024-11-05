@@ -2,7 +2,7 @@ import ServiceData from "@/app/data/ServiceData";
 
 const Service = () => {
     return(
-        <section id="services" className="services section-bg">
+        /*<section id="services" className="services section-bg">
       <div className="container" data-aos="fade-up">
 
         <div className="section-title">
@@ -20,7 +20,17 @@ const Service = () => {
           <ServiceData />
 
       </div>
-    </section>
+    </section>*/
+
+    <div className="service" id="service">
+        <div className="container">
+            <div className="section-header text-center">
+                <p>Nos Services</p>
+                <h2>Nous fournissons des services</h2>
+            </div>
+            <ServiceData />
+        </div>
+    </div>
     );
 }
 

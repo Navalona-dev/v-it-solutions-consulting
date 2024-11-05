@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "animate.css": "^4.1.1",
     "aos": "^2.3.4",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
@@ -17,7 +18,9 @@
     "next": "14.2.15",
     "react": "^18",
     "react-dom": "^18",
+    "react-slick": "^0.30.2",
     "react-waypoint": "^10.3.0",
+    "slick-carousel": "^1.8.1",
     "swiper": "^11.1.14",
     "waypoints": "^4.0.1"
   },
@@ -27,6 +30,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-slick": "^0.23.13",
     "eslint": "^8",
     "eslint-config-next": "14.2.15",
     "typescript": "^5"

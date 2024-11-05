@@ -33,27 +33,26 @@ const TeamData = () => {
     return(
         <div className="row">
             {data.map((item, index) => (
-                <div className="col-lg-6 mt-4">
-                    <div className="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="400">
-                    <div className="pic">
+
+                <div className="col-lg-3 col-md-6 wow" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1500">
+                    <div className="team-item">
+                        <div className="team-img">
                         <Image src={item.image} className="img-fluid" alt="" />
                         </div>
-                    <div className="member-info">
-                        <h4>{item.name}</h4>
-                        <span>{item.status}</span>
-                        <p>{item.descritpion}</p>
-                        <div className="social">
-                        {item.socialLink.map((item, index) => (
-                            <a href={item.link}><i className={item.icon}></i></a>
-                        ))}
+                        <div className="team-text">
+                            <h2>{item.name}</h2>
+                            <p>{item.status}</p>
                         </div>
-                    </div>
+                        <div className="team-social">
+                            {item.socialLink.map((item, index) => (
+                                <a className="social-tw" href={item.link}><i className={item.icon}></i></a>
+                            ))}
+                        </div>
                     </div>
                 </div>
             ))}
-          
 
-        </div>
+    </div>
     );
 }
 

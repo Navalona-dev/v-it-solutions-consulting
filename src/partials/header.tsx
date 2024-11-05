@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [showBackToTop, setShowBackToTop] = useState(false);
+    const [activeMenu, setActiveMenu] = useState('#carousel'); // L'élément actif par défaut
 
-    // Fonction pour faire défiler vers l'élément cible
     const scrollto = (el: string) => {
         const header = document.getElementById('header');
         const offset = header ? header.offsetHeight : 0;
@@ -18,81 +19,72 @@ const Header = () => {
         }
     };
 
-    // Gestionnaire d'événements pour les liens de navigation
     const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, el: string) => {
         event.preventDefault();
         scrollto(el);
+        setActiveMenu(el); // Met à jour l'élément actif
     };
 
-    // Gestionnaire de défilement
     const handleScroll = () => {
-        if (window.scrollY > 50) { // Ajustez la valeur selon vos besoins
+        if (window.scrollY > 90) {
             setIsScrolled(true);
+            if (window.scrollY > 200) {
+                setShowBackToTop(true);
+            } else {
+                setShowBackToTop(false);
+            }
         } else {
             setIsScrolled(false);
+            setShowBackToTop(false);
         }
-    };
-
-    // Fonction pour gérer les liens de la barre de navigation active
-    const navbarlinksActive = () => {
-        const navbarlinks = document.querySelectorAll<HTMLAnchorElement>('#navbar .scrollto'); // Caster ici
-        let position = window.scrollY + 200;
-
-        navbarlinks.forEach(navbarlink => {
-            if (!navbarlink.hash) return; // Ici, navbarlink est reconnu comme HTMLAnchorElement
-            const section = document.querySelector(navbarlink.hash) as HTMLElement; // Caster ici
-            if (!section) return;
-            if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
-                navbarlink.classList.add('active');
-            } else {
-                navbarlink.classList.remove('active');
-            }
-        });
     };
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
-        window.addEventListener('load', navbarlinksActive);
-        window.addEventListener('scroll', navbarlinksActive);
-
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('load', navbarlinksActive);
-            window.removeEventListener('scroll', navbarlinksActive);
         };
     }, []);
 
-    return (
-        <header id="header" className={`fixed-top ${isScrolled ? 'scrolled' : ''}`}>
-            <div className="container d-flex align-items-center">
-                <h1 className="logo me-auto"><a href="index.html">VISCO</a></h1>
-                <a href="index.html" className="logo me-auto">
-                    <img src="assets/img/logo.png" alt="" className="img-fluid" />
-                </a>
+    const scrollToTop = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
-                <nav id="navbar" className="navbar">
-                    <ul>
-                        <li><a className="nav-link scrollto active" href="#hero" onClick={(e) => handleNavClick(e, '#hero')}>Accueil</a></li>
-                        <li><a className="nav-link scrollto" href="#about" onClick={(e) => handleNavClick(e, '#about')}>À propos</a></li>
-                        <li><a className="nav-link scrollto" href="#services" onClick={(e) => handleNavClick(e, '#services')}>Services</a></li>
-                        <li><a className="nav-link scrollto" href="#portfolio" onClick={(e) => handleNavClick(e, '#portfolio')}>Blog</a></li>
-                        <li><a className="nav-link scrollto" href="#team" onClick={(e) => handleNavClick(e, '#team')}>Équipe</a></li>
-                        <li className="dropdown">
-                            <a href="#"><span>Offres</span> <i className="bi bi-chevron-down"></i></a>
-                            <ul>
-                                <li><a href="#">Drop Down 1</a></li>
-                                <li><a href="#">Drop Down 2</a></li>
-                                <li><a href="#">Drop Down 3</a></li>
-                                <li><a href="#">Drop Down 4</a></li>
-                            </ul>
-                        </li>
-                        <li><a className="nav-link scrollto" href="#contact" onClick={(e) => handleNavClick(e, '#contact')}>Contact</a></li>
-                        <li><a className="getstarted scrollto" href="#about" onClick={(e) => handleNavClick(e, '#about')}>Commencer</a></li>
-                    </ul>
-                    <i className="bi bi-list mobile-nav-toggle"></i>
-                </nav>
+    return (
+        <>
+            <div className={`nav-bar ${isScrolled ? 'nav-sticky' : ''}`} id='header'>
+                <div className="container-fluid">
+                    <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
+                        <a href="#" className="navbar-brand">MENU</a>
+                        <button type="button" className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            <div className="navbar-nav mr-auto">
+                                <a href="#carousel" onClick={(e) => handleNavClick(e, '#carousel')} className={`nav-item nav-link ${activeMenu === '#carousel' ? 'active' : ''}`}>Accueil</a>
+                                <a href="#about" onClick={(e) => handleNavClick(e, '#about')} className={`nav-item nav-link ${activeMenu === '#about' ? 'active' : ''}`}>À Propos</a>
+                                <a href="#service" onClick={(e) => handleNavClick(e, '#service')} className={`nav-item nav-link ${activeMenu === '#service' ? 'active' : ''}`}>Service</a>
+                                <a href="#team" onClick={(e) => handleNavClick(e, '#team')} className={`nav-item nav-link ${activeMenu === '#team' ? 'active' : ''}`}>Équipe</a>
+                                <a href="#blog" onClick={(e) => handleNavClick(e, '#blog')} className={`nav-item nav-link ${activeMenu === '#blog' ? 'active' : ''}`}>Projet</a>
+                                <a href="#faq" onClick={(e) => handleNavClick(e, '#faq')} className={`nav-item nav-link ${activeMenu === '#faq' ? 'active' : ''}`}>Question</a>
+                                <a href="#testimonial" onClick={(e) => handleNavClick(e, '#testimonial')} className={`nav-item nav-link ${activeMenu === '#testimonial' ? 'active' : ''}`}>Témoignage</a>
+                                <a href="#contact" onClick={(e) => handleNavClick(e, '#contact')} className={`nav-item nav-link ${activeMenu === '#contact' ? 'active' : ''}`}>Contact</a>
+                            </div>
+                            <div className="ml-auto">
+                                <a className="btn" href="https://wa.me/+261349053688">Whatsapp</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
             </div>
-        </header>
+
+            {showBackToTop && (
+                <button className="back-to-top" onClick={scrollToTop}>
+                    &#8679; {/* Vous pouvez mettre une icône ici */}
+                </button>
+            )}
+        </>
     );
 };
 

@@ -2,12 +2,19 @@
 import { useEffect } from 'react';
 import "./page.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import '../assets/css/style.css';
+import '../assets/flaticon/font/flaticon.css';
+import 'animate.css/animate.min.css';
 
 import 'aos/dist/aos.css'; 
 import AOS from 'aos'; 
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+import TopBar from '@/partials/topBar';
 import Header from "@/partials/header";
 import Hero from "@/pages/hero";
 import Customer from "@/pages/customer";
@@ -16,11 +23,15 @@ import Why from '@/pages/why-us';
 import Skill from '@/pages/skill';
 import Service from '@/pages/service';
 import Cta from '@/pages/cta';
-import Portfolio from '@/pages/portfolio';
 import Team from '@/pages/team';
 import Faq from '@/pages/faq';
 import Contact from '@/pages/contact';
 import Footer from '@/partials/footer';
+import Feature from '@/pages/feature';
+import Fact from '@/pages/fact';
+import Video from '@/pages/video';
+import Testimonial from '@/pages/testimonila';
+import Project from '@/pages/project';
 
 export default function Home() {
   useEffect(() => {
@@ -59,27 +70,21 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="">
+    <div className="wrapper">
+      <TopBar />
       <Header />
-      <main className="">
-        <Hero />
-        <Customer />
-        <About />
-        <Why />
-        <Skill />
-        <Service />
-        <Cta />
-        <Portfolio />
-        <Team />
-        <Faq />
-        <Contact />
-      </main>
+      <Hero />
+      <Feature />
+      <About />
+      <Fact />
+      <Service />
+      <Video />
+      <Team />
+      <Faq />
+      <Testimonial />
+      <Project />
+      <Contact />
       <Footer />
-
-      <div id="preloader"></div>
-      <a href="#" className="back-to-top d-flex align-items-center justify-content-center">
-        <i className="bi bi-arrow-up-short"></i>
-      </a>
     </div>
   );
 }
